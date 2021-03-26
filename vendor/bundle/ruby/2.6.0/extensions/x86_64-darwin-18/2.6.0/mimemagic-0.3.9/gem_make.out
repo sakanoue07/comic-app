@@ -1,0 +1,2 @@
+current directory: /Users/user/react/cafe_app/vendor/bundle/ruby/2.6.0/gems/mimemagic-0.3.9/ext/mimemagic
+/Users/user/.rbenv/versions/2.6.3/bin/ruby -I/Users/user/.rbenv/versions/2.6.3/lib/ruby/site_ruby/2.6.0 -rrubygems /Users/user/react/cafe_app/vendor/bundle/ruby/2.6.0/gems/rake-13.0.3/exe/rake RUBYARCHDIR\=/Users/user/react/cafe_app/vendor/bundle/ruby/2.6.0/extensions/x86_64-darwin-18/2.6.0/mimemagic-0.3.9 RUBYLIBDIR\=/Users/user/react/cafe_app/vendor/bundle/ruby/2.6.0/extensions/x86_64-darwin-18/2.6.0/mimemagic-0.3.9
