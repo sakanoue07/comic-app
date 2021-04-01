@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { signup } from "../../redux/operation";
-import styled from "styled-components";
-import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { login } from "../../redux/operation";
+import styled from "styled-components";
+
 const Div = styled.div`
   width: 500px;
   color: #000;
@@ -48,33 +48,19 @@ const Column = styled.div`
 `;
 
 function Signup() {
-  const [userName, setUserName] = useState<string>("");
   const [userEmail, setUserEmail] = useState<string>("");
   const [userPassword, setUserPassword] = useState<string>("");
-  const [userCom, setUserCom] = useState<string>("");
-
   const dispatch = useDispatch();
-  const history = useHistory();
-  const handleChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUserName(e.target.value);
-  };
+
   const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserEmail(e.target.value);
   };
   const handleChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserPassword(e.target.value);
   };
-  const handleChangeCom = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUserCom(e.target.value);
-  };
-
   return (
     <Div>
-      <H1>Sign Up</H1>
-      <Column>
-        <H2>Username</H2>
-        <Input type="text" placeholder="Name" onChange={handleChangeName} />
-      </Column>
+      <H1>Log In</H1>
       <Column>
         <H2>UserEmail</H2>
         <Input type="text" placeholder="Email" onChange={handleChangeEmail} />
@@ -87,24 +73,13 @@ function Signup() {
           onChange={handleChangePassword}
         />
       </Column>
+
       <Column>
-        <H2>Password confirmation</H2>
-        <Input
-          type="password"
-          placeholder="Confirmation"
-          onChange={handleChangeCom}
-        />
+        <Link to="/signup">Signup</Link>
       </Column>
       <Column>
-        <Link to="/map">mappp</Link>
-      </Column>
-      <Column>
-        <Button
-          onClick={() =>
-            dispatch(signup(userName, userEmail, userPassword, userCom))
-          }
-        >
-          Sign Up
+        <Button onClick={() => dispatch(login(userEmail, userPassword))}>
+          Log In!
         </Button>
       </Column>
     </Div>

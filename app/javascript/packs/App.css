@@ -1,0 +1,25 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-image: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+  font-family: "游明朝", "YuMincho", "ヒラギノ明朝 Pro W3",
+    "Hiragino Mincho Pro", "ＭＳ Ｐ明朝", "MS PMincho", serif;
+  min-height: 100vh;
+  color: rgb(1, 1, 1);
+  content: "";
+}
+
+a {
+  text-decoration: none;
+  color: rgb(1, 1, 1);
+}
+a img {
+  border: none;
+}
+input:focus {
+  outline: 0;
+}
