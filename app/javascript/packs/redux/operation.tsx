@@ -36,7 +36,7 @@ export const signup = (
                 isSignedIn: true,
               })
             );
-            dispatch(push("/top"));
+            dispatch(push("/search"));
           }
         })
         .catch((e) => console.log(e));
@@ -70,7 +70,7 @@ export const login = (userEmail: string, userPassword: string) => {
                 isSignedIn: true,
               })
             );
-            dispatch(push("/top"));
+            dispatch(push("/search"));
           }
         })
         .catch((e) => console.log(e));

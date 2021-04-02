@@ -1,8 +1,9 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import Signup from "./components/Auth/Signup";
-import Top from "./components/Top";
+import Search from "./components/Comic/Search";
 import Login from "./components/Auth/Login";
+import Top from "./components/Comic/Top";
 import Error from "./components/Error";
 import "./App.css";
 import { useSelector } from "react-redux";
@@ -14,11 +15,15 @@ function App() {
     <div>
       <Switch>
         {signedIn ? (
-          <Route exact path="/top" component={Top} />
+          <>
+            <Route exact path="/search" component={Search} />
+            <Route exact path="/top" component={Top} />
+          </>
         ) : (
           <>
             <Route exact path="/" component={Login} />
             <Route exact path="/signup" component={Signup} />
+            <Route exact path="/search" component={Error} />
             <Route exact path="/top" component={Error} />
           </>
         )}

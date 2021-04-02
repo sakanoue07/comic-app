@@ -54,7 +54,6 @@ function Signup() {
   const [userCom, setUserCom] = useState<string>("");
 
   const dispatch = useDispatch();
-  const history = useHistory();
   const handleChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserName(e.target.value);
   };

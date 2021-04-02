@@ -1,7 +1,6 @@
 export const SIGNUP = "SIGNUP";
 export const SIGNOUT = "SIGNOUT";
 export const LOGIN = "LOGIN";
-
 export interface UserState {
   name: string;
   email: string;

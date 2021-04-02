@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { signout } from "../redux/operation";
+import { signout } from "../../redux/operation";
 import { useDispatch } from "react-redux";
+import { push } from "connected-react-router";
 import styled from "styled-components";
 import axios from "axios";
 
@@ -48,11 +49,28 @@ const Column = styled.div`
   width: 80%;
 `;
 
-function Top() {
+function Search() {
   const [comicDate, setComitDate] = useState("");
-  const [comicInfo, setComicInfo] = useState([]);
+  const [comicIsbn, setComicIsbn] = useState([]);
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    const getComic = async () => {
+      if (comicIsbn.length !== 0) {
+        await axios
+          .post("/api/v1/comic/openDB", { comicIsbn: comicIsbn })
+          .then((res) => {
+            console.log(res.data);
+            console.log(res.data[0].summary.title);
+            console.log(res.data[0].summary.publisher);
+            console.log(res.data[0].summary.author);
+            console.log(res.data[0].onix.RecordReference);
+            dispatch(push("/top"));
+          });
+      }
+    };
+    getComic();
+  }, [comicIsbn]);
   const handleChangeDate = (e: React.ChangeEvent<HTMLInputElement>) => {
     setComitDate(e.target.value);
   };
@@ -61,14 +79,18 @@ function Top() {
     let year = container[0];
     let month = container[1];
     await axios
-      .get(
-        `https://books.rakuten.co.jp/event/book/comic/calendar/${year}/${month}/js/booklist.json`,
-        { withCredentials: true }
-      )
+      .post("/api/v1/comic", {
+        comic: {
+          year: year,
+          month: month,
+        },
+      })
       .then((res) => {
-        setComicInfo(res.data.list);
-        console.log(res.data);
-      });
+        // setComicInfo(res.data.list);
+        // console.log(res.data.list.map((isbn) => isbn[3]));
+        setComicIsbn(res.data.list.map((isbn) => isbn[3]));
+      })
+      .catch((e) => console.log(e));
   };
   return (
     <Div>
@@ -89,4 +111,4 @@ function Top() {
   );
 }
 
-export default Top;
+export default Search;
