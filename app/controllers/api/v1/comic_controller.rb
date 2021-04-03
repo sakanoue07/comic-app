@@ -7,7 +7,7 @@ class Api::V1::ComicController < ApplicationController
         year = params[:comic][:year]
         month = params[:comic][:month]
         url = URI.parse("https://books.rakuten.co.jp/event/book/comic/calendar/#{year}/#{month}/js/booklist.json")
-        logger.debug("https://books.rakuten.co.jp/event/book/comic/calendar/#{year}/#{month}/js/booklist.json")
+        # logger.debug("https://books.rakuten.co.jp/event/book/comic/calendar/#{year}/#{month}/js/booklist.json")
         # uri = URI.parse('https://books.rakuten.co.jp/event/book/comic/calendar/2021/04/js/booklist.json')
         response = Net::HTTP.get_response(url)
         result = response.body
@@ -18,17 +18,19 @@ class Api::V1::ComicController < ApplicationController
     def openDB
         isbn_box = []
         comicIsbn = params[:comicIsbn]        
-        # comicIsbn[0..10].each do |isbn|
-        #     url = URI.parse("https://api.openbd.jp/v1/get?isbn=#{isbn}")
-        #     response = Net::HTTP.get_response(url)
-        #     result = JSON.parse(response.body)
-        #     isbn_box.push(result)
-        # end
+        comicIsbn[0..20].each do |isbn|
+            url = URI.parse("https://api.openbd.jp/v1/get?isbn=#{isbn}")
+            response = Net::HTTP.get_response(url)
+            result = JSON.parse(response.body)
+            if result != [nil]
+                isbn_box.push(result)
+            end
+        end
         # isbn = params[:comicIsbn]
-        url = URI.parse("https://api.openbd.jp/v1/get?isbn=#{comicIsbn[0]}&pretty")
-        response = Net::HTTP.get_response(url)
-        result = JSON.parse(response.body)
-        render json: result
+        # url = URI.parse("https://api.openbd.jp/v1/get?isbn=#{comicIsbn[0]}&pretty")
+        # response = Net::HTTP.get_response(url)
+        # result = JSON.parse(response.body)
+        render json: isbn_box
 
 
     end

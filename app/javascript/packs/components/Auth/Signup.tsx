@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { signup } from "../../redux/operation";
 import styled from "styled-components";
-import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 const Div = styled.div`
   width: 500px;

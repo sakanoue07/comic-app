@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { push } from "connected-react-router";
 import styled from "styled-components";
 import axios from "axios";
+import { getComics } from "../../redux/ActionCreater";
 
 const Div = styled.div`
   width: 500px;
@@ -49,11 +50,14 @@ const Column = styled.div`
   width: 80%;
 `;
 
+interface ComicTitle {
+  comicTitle: [];
+}
 function Search() {
   const [comicDate, setComitDate] = useState("");
   const [comicIsbn, setComicIsbn] = useState([]);
-  const dispatch = useDispatch();
 
+  const dispatch = useDispatch();
   useEffect(() => {
     const getComic = async () => {
       if (comicIsbn.length !== 0) {
@@ -61,10 +65,25 @@ function Search() {
           .post("/api/v1/comic/openDB", { comicIsbn: comicIsbn })
           .then((res) => {
             console.log(res.data);
-            console.log(res.data[0].summary.title);
-            console.log(res.data[0].summary.publisher);
-            console.log(res.data[0].summary.author);
-            console.log(res.data[0].onix.RecordReference);
+            dispatch(
+              getComics({
+                comicsTitle: res.data.map(
+                  (comic: any) => comic[0].summary.title
+                ),
+                comicsAuthor: res.data.map(
+                  (comic: any) => comic[0].summary.author
+                ),
+                comicsImage: res.data.map(
+                  (comic: any) => comic[0].summary.cover
+                ),
+                comicsPublisher: res.data.map(
+                  (comic: any) => comic[0].summary.publisher
+                ),
+                comicsKey: res.data.map(
+                  (comic: any) => comic[0].onix.RecordReference
+                ),
+              })
+            );
             dispatch(push("/top"));
           });
       }
@@ -86,8 +105,6 @@ function Search() {
         },
       })
       .then((res) => {
-        // setComicInfo(res.data.list);
-        // console.log(res.data.list.map((isbn) => isbn[3]));
         setComicIsbn(res.data.list.map((isbn) => isbn[3]));
       })
       .catch((e) => console.log(e));

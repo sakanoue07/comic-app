@@ -14,17 +14,17 @@ function App() {
   return (
     <div>
       <Switch>
+        <Route exact path="/top" component={Top} />
         {signedIn ? (
           <>
             <Route exact path="/search" component={Search} />
-            <Route exact path="/top" component={Top} />
           </>
         ) : (
           <>
             <Route exact path="/" component={Login} />
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/search" component={Error} />
-            <Route exact path="/top" component={Error} />
+            {/* <Route exact path="/top" component={Error} /> */}
           </>
         )}
       </Switch>
