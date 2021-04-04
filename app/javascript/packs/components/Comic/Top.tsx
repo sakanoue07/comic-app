@@ -150,7 +150,7 @@ function Top() {
     <Div>
       <PageTitle>漫画一覧です</PageTitle>
       {(() => {
-        let items = [];
+        let items: Array<JSX.Element> = [];
         for (let i = 0; i < comicLength; i++) {
           items.push(
             <Grid
