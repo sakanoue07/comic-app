@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 import { signup } from "../../redux/operation";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
+import media from "styled-media-query";
+
 const Div = styled.div`
-  width: 500px;
+  width: 60%;
   color: #000;
   top: 50%;
   left: 50%;
@@ -16,6 +18,11 @@ const Div = styled.div`
   background-color: #fff;
   border-radius: 20px;
   text-align: center;
+  ${media.lessThan("medium")`
+    width: 90%;
+    height: 90%;
+    overflow-y: scroll;
+  `}
 `;
 
 const H1 = styled.h1`
@@ -68,6 +75,7 @@ function Signup() {
 
   return (
     <Div>
+      <H1>漫画検索アプリ</H1>
       <H1>Sign Up</H1>
       <Column>
         <H2>Username</H2>
@@ -92,9 +100,6 @@ function Signup() {
           placeholder="Confirmation"
           onChange={handleChangeCom}
         />
-      </Column>
-      <Column>
-        <Link to="/map">mappp</Link>
       </Column>
       <Column>
         <Button

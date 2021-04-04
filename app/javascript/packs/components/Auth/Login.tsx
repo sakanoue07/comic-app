@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../../redux/operation";
 import styled from "styled-components";
+import media from "styled-media-query";
 
 const Div = styled.div`
-  width: 500px;
+  width: 40%;
   color: #000;
   top: 50%;
   left: 50%;
@@ -17,6 +18,11 @@ const Div = styled.div`
   background-color: #fff;
   border-radius: 20px;
   text-align: center;
+  ${media.lessThan("medium")`
+    width: 90%;
+    height: 90%;
+    overflow-y: scroll;
+  `}
 `;
 
 const H1 = styled.h1`
@@ -60,6 +66,7 @@ function Signup() {
   };
   return (
     <Div>
+      <H1>漫画検索アプリ</H1>
       <H1>Log In</H1>
       <Column>
         <H2>UserEmail</H2>

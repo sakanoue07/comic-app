@@ -3,6 +3,9 @@ export const SIGNOUT = "SIGNOUT";
 export const LOGIN = "LOGIN";
 export const COMICS = "COMICS";
 export const REMOVE_C = "REMOVE_C";
+export const COMIC = "COMIC";
+export const RE_ONE = "RE_ONE";
+
 export interface UserState {
   name: string;
   email: string;
@@ -15,6 +18,25 @@ export interface Comics {
   comicsImage: [];
   comicsPublisher: [];
   comicsKey: [];
+  comicLength: number;
+}
+
+export interface Comic {
+  title: string;
+  image: string;
+  publisher: string;
+  author: string;
+  pubdate: string;
+  text: string;
+}
+interface ComicOne {
+  type: typeof COMIC;
+  payload: Comic;
+}
+
+interface RemoveOne {
+  type: typeof RE_ONE;
+  paload: Comic;
 }
 interface GetComic {
   type: typeof COMICS;
@@ -43,3 +65,4 @@ interface Signout {
 
 export type UserActionType = Signin | Signout | Login;
 export type ComicAtionType = GetComic | RemoveComic;
+export type OneComicType = ComicOne | RemoveOne;

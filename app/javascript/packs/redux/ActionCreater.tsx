@@ -1,4 +1,13 @@
-import { SIGNUP, LOGIN, SIGNOUT, COMICS, REMOVE_C } from "./ActionType";
+import {
+  SIGNUP,
+  LOGIN,
+  SIGNOUT,
+  COMICS,
+  REMOVE_C,
+  COMIC,
+  RE_ONE,
+  Comic,
+} from "./ActionType";
 export const signinUser = (UserState: {
   name: string;
   email: string;
@@ -44,6 +53,7 @@ export const getComics = (Comics: {
   comicsImage: [];
   comicsPublisher: [];
   comicsKey: [];
+  comicLength: number;
 }) => {
   return {
     type: COMICS,
@@ -53,6 +63,26 @@ export const getComics = (Comics: {
       comicsImage: Comics.comicsImage,
       comicsPublisher: Comics.comicsPublisher,
       comicsKey: Comics.comicsKey,
+      comicLength: Comics.comicLength,
     },
+  };
+};
+
+export const ComicShow = (Comic: Comic) => {
+  return {
+    type: COMIC,
+    payload: {
+      title: Comic.title,
+      image: Comic.image,
+      author: Comic.author,
+      publisher: Comic.publisher,
+      pubdate: Comic.pubdate,
+      text: Comic.text,
+    },
+  };
+};
+export const ReOne = () => {
+  return {
+    type: RE_ONE,
   };
 };

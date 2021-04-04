@@ -1068,6 +1068,13 @@
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.4.tgz"
   integrity sha512-1HcDas8SEj4z1Wc696tH56G8OlRaH/sqZOynNNB+HF0WOeXPaxTtbYzJY2oEfiUxjSKjhCKr+MvR7dCHcEelug==
 
+"@types/react-dom@^17.0.3":
+  version "17.0.3"
+  resolved "https://registry.npmjs.org/@types/react-dom/-/react-dom-17.0.3.tgz"
+  integrity sha512-4NnJbCeWE+8YBzupn/YrJxZ8VnjcJq5iR1laqQ1vkpQgBiA7bwk0Rp24fxsdNinzJY2U+HHS4dJJDPdoMjdJ7w==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-redux@^7.1.16":
   version "7.1.16"
   resolved "https://registry.npmjs.org/@types/react-redux/-/react-redux-7.1.16.tgz"
@@ -6550,6 +6557,11 @@ react-is@^16.13.1, react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1:
   resolved "https://registry.npmjs.org/react-is/-/react-is-17.0.2.tgz"
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
 
+react-loading@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.npmjs.org/react-loading/-/react-loading-2.0.3.tgz"
+  integrity sha512-Vdqy79zq+bpeWJqC+xjltUjuGApyoItPgL0vgVfcJHhqwU7bAMKzysfGW/ADu6i0z0JiOCRJjo+IkFNkRNbA3A==
+
 react-redux@^7.2.3:
   version "7.2.3"
   resolved "https://registry.npmjs.org/react-redux/-/react-redux-7.2.3.tgz"
@@ -7560,6 +7572,11 @@ styled-components@^5.2.1:
     hoist-non-react-statics "^3.0.0"
     shallowequal "^1.1.0"
     supports-color "^5.5.0"
+
+styled-media-query@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.npmjs.org/styled-media-query/-/styled-media-query-2.1.2.tgz"
+  integrity sha512-ds24iBxOrfIhdHP+e23y6kj1gbosgWu+tgAuxvMrYmnp6Sju/LjuY8lfkiVnn6P7mcdhtwpC2Z43o+apT9UdJg==
 
 stylehacks@^4.0.0:
   version "4.0.3"

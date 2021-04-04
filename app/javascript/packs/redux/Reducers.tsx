@@ -9,6 +9,10 @@ import {
   UserActionType,
   Comics,
   ComicAtionType,
+  Comic,
+  OneComicType,
+  COMIC,
+  RE_ONE,
 } from "./ActionType";
 
 const initialUser: UserState = {
@@ -17,12 +21,21 @@ const initialUser: UserState = {
   isSignedIn: false,
 };
 
+const initialComic: Comic = {
+  title: "",
+  image: "",
+  publisher: "",
+  author: "",
+  pubdate: "",
+  text: "",
+};
 const initialComics: Comics = {
   comicsTitle: [],
   comicsAuthor: [],
   comicsImage: [],
   comicsPublisher: [],
   comicsKey: [],
+  comicLength: 0,
 };
 export const userAuth = (state = initialUser, action: UserActionType) => {
   switch (action.type) {
@@ -40,10 +53,21 @@ export const userAuth = (state = initialUser, action: UserActionType) => {
 export const getComics = (state = initialComics, action: ComicAtionType) => {
   switch (action.type) {
     case COMICS:
-      console.log("payload  ", action.payload);
       return { ...state, ...action.payload };
     case REMOVE_C:
       return initialComics;
+    default:
+      return state;
+  }
+};
+
+export const oneComic = (state = initialComic, action: OneComicType) => {
+  switch (action.type) {
+    case COMIC:
+      console.log("oneComic", action.payload);
+      return { ...state, ...action.payload };
+    case RE_ONE:
+      return initialComic;
     default:
       return state;
   }

@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { signout } from "../../redux/operation";
 import { useDispatch } from "react-redux";
 import { push } from "connected-react-router";
 import styled from "styled-components";
 import axios from "axios";
 import { getComics } from "../../redux/ActionCreater";
+import media from "styled-media-query";
+import Loading from "./Loading";
 
 const Div = styled.div`
-  width: 500px;
+  width: 60%;
   color: #000;
   top: 50%;
   left: 50%;
@@ -20,14 +21,11 @@ const Div = styled.div`
   background-color: #fff;
   border-radius: 20px;
   text-align: center;
-`;
-
-const H1 = styled.h1`
-  font-size: 20px;
-`;
-
-const H2 = styled.h2`
-  font-size: 15px;
+  ${media.lessThan("medium")`
+    width: 90%;
+    height: 90%;
+    overflow-y: scroll;
+  `}
 `;
 
 const Input = styled.input`
@@ -38,9 +36,23 @@ const Button = styled.p`
   padding: 10px 10px;
   border-radius: 10px;
   opacity: 0.7;
+  width: 50%;
+  margin: 0 auto;
   transition: all 0.4s;
   &:hover {
     opacity: 1;
+    cursor: pointer;
+  }
+`;
+const BackButton = styled.p`
+  background-color: #fff;
+  color: #dfb999;
+  border: 3px solid #dfb999;
+  padding: 10px 10px;
+  border-radius: 10px;
+  width: 50%;
+  margin: 30px auto;
+  &:hover {
     cursor: pointer;
   }
 `;
@@ -56,7 +68,11 @@ interface ComicTitle {
 function Search() {
   const [comicDate, setComitDate] = useState("");
   const [comicIsbn, setComicIsbn] = useState([]);
+  const [open, setOpen] = useState<boolean>(false);
 
+  const openModal = () => {
+    setOpen((prev) => !prev);
+  };
   const dispatch = useDispatch();
   useEffect(() => {
     const getComic = async () => {
@@ -64,7 +80,7 @@ function Search() {
         await axios
           .post("/api/v1/comic/openDB", { comicIsbn: comicIsbn })
           .then((res) => {
-            console.log(res.data);
+            console.log(res.data.length);
             dispatch(
               getComics({
                 comicsTitle: res.data.map(
@@ -82,6 +98,7 @@ function Search() {
                 comicsKey: res.data.map(
                   (comic: any) => comic[0].onix.RecordReference
                 ),
+                comicLength: res.data.length,
               })
             );
             dispatch(push("/top"));
@@ -105,26 +122,39 @@ function Search() {
         },
       })
       .then((res) => {
-        setComicIsbn(res.data.list.map((isbn) => isbn[3]));
+        setComicIsbn(res.data.list.map((isbn: any) => isbn[3]));
       })
       .catch((e) => console.log(e));
   };
   return (
-    <Div>
-      <Column>
-        <Input
-          type="month"
-          name="example2"
-          value={comicDate}
-          onChange={handleChangeDate}
-        />
-      </Column>
-      <Column>
-        <Button onClick={() => getComic(comicDate)}>Search Comic</Button>
-      </Column>
-      <p onClick={() => dispatch(signout())}>Sign out</p>
-      <Link to="/signup">SignUp</Link>
-    </Div>
+    <>
+      <Loading open={open} setOpen={setOpen} />
+      <Div>
+        <Column>
+          <h2>漫画検索</h2>
+          <p>検索に時間がかかります。</p>
+          <Input
+            type="month"
+            name="example2"
+            value={comicDate}
+            onChange={handleChangeDate}
+          />
+          <p>2015~2021の5月くらいまで</p>
+        </Column>
+        <Column>
+          <Button
+            onClick={() => {
+              getComic(comicDate), openModal();
+            }}
+          >
+            Search Comic
+          </Button>
+        </Column>
+        <Column>
+          <BackButton onClick={() => dispatch(signout())}>Sign out</BackButton>
+        </Column>
+      </Div>
+    </>
   );
 }
 
